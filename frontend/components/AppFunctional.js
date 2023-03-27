@@ -1,78 +1,172 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 // Suggested initial states
 const initialMessage = ''
 const initialEmail = ''
 const initialSteps = 0
 const initialIndex = 4 // the index the "B" is at
+const initialCoordinates = ["(1,1)","(1,2)","(1,3)","(2,1)","(2,2)","(2.3)","(3,1)","(3,2)","(3,3)"]
 
 export default function AppFunctional(props) {
   // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
   // You can delete them and build your own logic from scratch.
 
-  function getXY() {
-    // It it not necessary to have a state to track the coordinates.
-    // It's enough to know what index the "B" is at, to be able to calculate them.
+  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [count, setCount] = useState(initialSteps);
+  const [email, setEmail] = useState(initialEmail); 
+  const [message, setMessage] = useState(initialMessage)
+
+
+  function up() {
+    if (currentIndex === 0|| currentIndex === 1|| currentIndex === 2  ) {
+      setCount ( count + 0 ) ;
+    } else {
+      setCurrentIndex ( currentIndex - 3 ) ;
+      setCount ( count + 1 )
+    }  
   }
 
-  function getXYMessage() {
-    // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
-    // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
-    // returns the fully constructed string.
+  function down() {
+    if (currentIndex === 7|| currentIndex === 6|| currentIndex === 8 ) {
+      setCount ( count + 0 )
+    } else {
+      setCurrentIndex(currentIndex + 3) ;
+      setCount ( count + 1 )
+    }  
+  }
+
+  function left() {
+    if (currentIndex === 0|| currentIndex === 3|| currentIndex === 6 ) {
+      setCount ( count + 0 ) 
+    } else {
+      setCurrentIndex ( currentIndex - 1 ) ;
+      setCount ( count + 1 )
+    }  
+  }
+
+  function right() {
+    if (currentIndex === 2|| currentIndex ===5 || currentIndex === 8) {
+      setCount ( count + 0 )
+    } else {
+      setCurrentIndex (currentIndex + 1) ; 
+      setCount ( count + 1)
+    }
+  }
+
+  function getXY() {
+    // Coordinates where B is at 
+    // It it not necessary to have a state to track the coordinates.
+    // It's enough to know what index the "B" is at, to be able to calculate them.
   }
 
   function reset() {
     // Use this helper to reset all states to their initial values.
   }
 
-  function getNextIndex(direction) {
-    // This helper takes a direction ("left", "up", etc) and calculates what the next index
-    // of the "B" would be. If the move is impossible because we are at the edge of the grid,
-    // this helper should return the current index unchanged.
+  const emailInput = e => {
+    const {value} = e.target;
+    setEmail(value);
   }
 
-  function move(evt) {
-    // This event handler can use the helper above to obtain a new index for the "B",
-    // and change any states accordingly.
+  const post = payload => {
+
+    axios.post('http://localhost:9000/api/result',payload)
+      .then( res => {
+        setMessage(res.message)
+      })
+      .catch( err => {
+        console.log (err)
+      } )
+
   }
 
-  function onChange(evt) {
-    // You will need this to update the value of the input.
+
+  const submit = e => {
+
+    const paylod = {
+      x: currentIndex,
+      y: currentIndex,
+      email: email,
+      steps: count
+    }
+    
+    e.preventDefault();
+    setEmail('');
+    post(paylod);
+
   }
 
-  function onSubmit(evt) {
-    // Use a POST request to send a payload to the server.
-  }
+
 
   return (
     <div id="wrapper" className={props.className}>
+
       <div className="info">
-        <h3 id="coordinates">Coordinates (2, 2)</h3>
-        <h3 id="steps">You moved 0 times</h3>
+
+        <h3 id="coordinates">
+          {`Coordinates ${initialCoordinates.at(currentIndex)}`}
+        </h3>
+
+        <h3 id="steps" >
+          {`You move ${count} ${count <= 1 ? 'time' : 'times'}`}
+        </h3>
       </div>
+
       <div id="grid">
         {
           [0, 1, 2, 3, 4, 5, 6, 7, 8].map(idx => (
-            <div key={idx} className={`square${idx === 4 ? ' active' : ''}`}>
-              {idx === 4 ? 'B' : null}
+            <div key={idx} className={`square${idx === currentIndex ? ' active' : ''}`}>
+              {idx === currentIndex ? 'B' : null}
             </div>
           ))
         }
       </div>
+
       <div className="info">
-        <h3 id="message"></h3>
+        <h3 id="message" >
+          {message}
+        </h3>
       </div>
+
       <div id="keypad">
-        <button id="left">LEFT</button>
-        <button id="up">UP</button>
-        <button id="right">RIGHT</button>
-        <button id="down">DOWN</button>
-        <button id="reset">reset</button>
+
+        <button
+          id="left"
+          type='button'
+          name='left'
+          onClick={left}
+        > ← </button>
+
+        <button 
+          id="up" 
+          type='button' 
+          name='up' 
+          onClick={up}
+        > ↑ </button>
+
+        <button 
+          id="right" 
+          type='button' 
+          name='right'
+          onClick={right}
+        > → </button>
+
+        <button 
+          id="down" 
+          type='button' 
+          name='down' 
+          onClick={down}
+        > ↓ </button>
+
+        <button id="reset" type='button' name='reset'>↻</button>
+
       </div>
+
       <form>
-        <input id="email" type="email" placeholder="type email"></input>
-        <input id="submit" type="submit"></input>
+        <input id="email" type="email" placeholder="type email" onChange={emailInput}  value={email}></input>
+        <input id="submit" type="submit" onClick={submit}></input>
       </form>
+
     </div>
   )
 }
