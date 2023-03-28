@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 // Suggested initial states
 const initialMessage = ''
@@ -18,9 +19,11 @@ export default function AppFunctional(props) {
 
 
   function up() {
-    if (currentIndex === 0|| currentIndex === 1|| currentIndex === 2  ) {
-      setCount ( count + 0 ) ;
-    } else {
+    if ( currentIndex === 0|| currentIndex === 1|| currentIndex === 2 ) { 
+      setCount(count + 0);
+      setMessage("You can't go up");
+    }   
+    else {
       setCurrentIndex ( currentIndex - 3 ) ;
       setCount ( count + 1 )
     }  
@@ -28,7 +31,8 @@ export default function AppFunctional(props) {
 
   function down() {
     if (currentIndex === 7|| currentIndex === 6|| currentIndex === 8 ) {
-      setCount ( count + 0 )
+      setCount (count + 0);
+      setMessage("You can't go down");
     } else {
       setCurrentIndex(currentIndex + 3) ;
       setCount ( count + 1 )
@@ -37,7 +41,8 @@ export default function AppFunctional(props) {
 
   function left() {
     if (currentIndex === 0|| currentIndex === 3|| currentIndex === 6 ) {
-      setCount ( count + 0 ) 
+      setCount ( count + 0 );
+      setMessage("You can't go left")
     } else {
       setCurrentIndex ( currentIndex - 1 ) ;
       setCount ( count + 1 )
@@ -46,21 +51,19 @@ export default function AppFunctional(props) {
 
   function right() {
     if (currentIndex === 2|| currentIndex ===5 || currentIndex === 8) {
-      setCount ( count + 0 )
+      setCount ( count + 0 );
+      setMessage("You can't go right");
     } else {
       setCurrentIndex (currentIndex + 1) ; 
       setCount ( count + 1)
     }
   }
 
-  function getXY() {
-    // Coordinates where B is at 
-    // It it not necessary to have a state to track the coordinates.
-    // It's enough to know what index the "B" is at, to be able to calculate them.
-  }
-
   function reset() {
-    // Use this helper to reset all states to their initial values.
+    setCount(0)
+    setCurrentIndex(4)
+    setEmail('')
+    setMessage('')
   }
 
   const emailInput = e => {
@@ -72,7 +75,8 @@ export default function AppFunctional(props) {
 
     axios.post('http://localhost:9000/api/result',payload)
       .then( res => {
-        setMessage(res.message)
+        console.log(res)
+        setMessage(res.data.message)
       })
       .catch( err => {
         console.log (err)
@@ -83,20 +87,18 @@ export default function AppFunctional(props) {
 
   const submit = e => {
 
-    const paylod = {
-      x: currentIndex,
-      y: currentIndex,
+    const payload = {
+      x: initialCoordinates[currentIndex].slice(1,2),
+      y: initialCoordinates[currentIndex].slice(3,4),
       email: email,
       steps: count
     }
     
     e.preventDefault();
     setEmail('');
-    post(paylod);
+    post(payload);
 
   }
-
-
 
   return (
     <div id="wrapper" className={props.className}>
@@ -158,7 +160,7 @@ export default function AppFunctional(props) {
           onClick={down}
         > ↓ </button>
 
-        <button id="reset" type='button' name='reset'>↻</button>
+        <button id="reset" type='button' name='reset' onClick={reset}>↻</button>
 
       </div>
 
