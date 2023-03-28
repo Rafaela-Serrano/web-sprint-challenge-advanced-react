@@ -110,7 +110,7 @@ export default function AppFunctional(props) {
         </h3>
 
         <h3 id="steps" >
-          {`You move ${count} ${count <= 1 ? 'time' : 'times'}`}
+          {`You moved ${count} ${count <= 1 ? 'time' : 'times'}`}
         </h3>
       </div>
 
