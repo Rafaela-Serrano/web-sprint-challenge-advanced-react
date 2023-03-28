@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-// Suggested initial states
-const errorMessage = ''
+// Suggested initial state
 const initialMessage = ''
 const initialEmail = ''
 const initialSteps = 0
@@ -17,7 +16,7 @@ export default function AppFunctional(props) {
   const [count, setCount] = useState(initialSteps);
   const [email, setEmail] = useState(initialEmail); 
   const [message, setMessage] = useState(initialMessage);
-  const [error, setError] = useState(errorMessage)
+  
 
 
   function up() {
@@ -112,7 +111,7 @@ export default function AppFunctional(props) {
         </h3>
 
         <h3 id="steps" >
-          {`You moved ${count} ${count <= 1 ? 'time' : 'times'}`}
+          {`You moved ${count} ${count === 1 ? 'time' : 'times'}`}
         </h3>
       </div>
 
