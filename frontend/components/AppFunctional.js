@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 // Suggested initial states
+const errorMessage = ''
 const initialMessage = ''
 const initialEmail = ''
 const initialSteps = 0
@@ -15,7 +16,8 @@ export default function AppFunctional(props) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [count, setCount] = useState(initialSteps);
   const [email, setEmail] = useState(initialEmail); 
-  const [message, setMessage] = useState(initialMessage)
+  const [message, setMessage] = useState(initialMessage);
+  const [error, setError] = useState(errorMessage)
 
 
   function up() {
@@ -79,7 +81,7 @@ export default function AppFunctional(props) {
         setMessage(res.data.message)
       })
       .catch( err => {
-        console.log (err)
+        setMessage(err.response.data.message)
       } )
 
   }
