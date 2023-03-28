@@ -6,7 +6,7 @@ const initialMessage = ''
 const initialEmail = ''
 const initialSteps = 0
 const initialIndex = 4 // the index the "B" is at
-const initialCoordinates = ["(1,1)","(1,2)","(1,3)","(2,1)","(2,2)","(2.3)","(3,1)","(3,2)","(3,3)"]
+const initialCoordinates = ["(1,1)","(2,1)","(3,1)","(1,2)","(2,2)","(3,2)","(1,3)","(2,3)","(3,3)"]
 
 export default function AppFunctional(props) {
   // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
