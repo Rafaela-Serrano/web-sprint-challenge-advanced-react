@@ -9,14 +9,14 @@ test ('app functional renders without errors' , () => {
   render (<AppFunctional/>)
 })
 
-test ('button Up to ve visible', () => {
+test ('button Up to be visible', () => {
 
   render (<AppFunctional/>);
 
   const buttonUp = document.querySelector('#up')
 
 
-  expect(buttonUp).toBeVisible();
+  expect(buttonUp).toBeVisible;
 
 })
 
