@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/jest-dom';
 import AppFunctional from './AppFunctional';
 
 
@@ -75,5 +75,5 @@ test ("typing on the input results in it's value changing to the entered text", 
     expect(emailDisplay).toBeInTheDocument();
 
   })
-  
+
 })
