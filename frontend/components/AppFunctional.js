@@ -138,30 +138,30 @@ export default function AppFunctional(props) {
           type='button'
           name='left'
           onClick={left}
-        > ← </button>
+        > L </button>
 
         <button 
           id="up" 
           type='button' 
           name='up' 
           onClick={up}
-        > ↑ </button>
+        > U </button>
 
         <button 
           id="right" 
           type='button' 
           name='right'
           onClick={right}
-        > → </button>
+        > R </button>
 
         <button 
           id="down" 
           type='button' 
           name='down' 
           onClick={down}
-        > ↓ </button>
+        > D </button>
 
-        <button id="reset" type='button' name='reset' onClick={reset}>↻</button>
+        <button id="reset" type='button' name='reset' onClick={reset}>reset</button>
 
       </div>
 
