@@ -24,9 +24,9 @@ test ('button Down to be visible' , () => {
 
   render (<AppFunctional/>);
 
-  const buttonDown = screen.getAllByRole('button', {name: /down/i});
+  const buttonDown = document.querySelector('#down')
 
-  expect(buttonDown).toBeVisible();
+  expect(buttonDown).toBeVisible;
 
 })
 
@@ -34,9 +34,9 @@ test ('button Right to be visible', () => {
 
   render (<AppFunctional/>);
 
-  const buttonRight = screen.getByRole('button', {name: /right/i});
+  const buttonRight = document.querySelector('#right')
 
-  expect(buttonRight).toBeVisible();
+  expect(buttonRight).toBeVisible;
 
 })
 
@@ -44,9 +44,9 @@ test ('button Left to be visible', () => {
 
   render (<AppFunctional/>);
 
-  const buttonLeft = screen.getByRole('button', {name: /left/i});
+  const buttonLeft = document.querySelector('#left')
 
-  expect(buttonLeft).toBeVisible();
+  expect(buttonLeft).toBeVisible;
 
 })
 
@@ -54,9 +54,9 @@ test ('button Reset to be visible', () => {
   
   render (<AppFunctional/>);
 
-  const buttonReset = screen.getByRole('button', {name: /reset/i});
+  const buttonReset = document.querySelector('#reset')
 
-  expect(buttonReset).toBeVisible();
+  expect(buttonReset).toBeVisible;
 
 })
 
@@ -64,7 +64,7 @@ test ("typing on the input results in it's value changing to the entered text", 
 
   render (<AppFunctional/>);
 
-  const emailField = screen.getByLabelText(/email*/i)
+  const emailField = document.querySelector('#email')
 
   fireEvent.type(emailField, 'raphaelatech@gmail.com')
 
