@@ -66,10 +66,11 @@ test ("typing on the input results in it's value changing to the entered text", 
 
   const emailField = document.querySelector('#email')
 
-  fireEvent.type(emailField, 'raphaelatech@gmail.com')
+  fireEvent.change(emailField, { target: { value: 'raphaelatech.gmail.com' } })
 
   await waitFor ( () => {
-    const emailDisplay = screen.queryByText('raphaelatech@gmail.com')
+
+    const emailDisplay = screen.findByText('raphaelatech@gmail.com')
 
     expect(emailDisplay).toBeInTheDocument();
 
