@@ -50,7 +50,7 @@ test ('button Left to be visible', () => {
 
 })
 
-tet ('button Reset to be visible', () => {
+test ('button Reset to be visible', () => {
   
   render (<AppFunctional/>);
 
