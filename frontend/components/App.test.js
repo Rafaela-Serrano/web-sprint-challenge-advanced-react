@@ -1,7 +1,6 @@
 
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/jest-dom';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import AppFunctional from './AppFunctional';
 
 
@@ -67,7 +66,7 @@ test ("typing on the input results in it's value changing to the entered text", 
 
   const emailField = screen.getByLabelText(/email*/i)
 
-  userEvent.type(emailField, 'raphaelatech@gmail.com')
+  fireEvent.type(emailField, 'raphaelatech@gmail.com')
 
   await waitFor ( () => {
     const emailDisplay = screen.queryByText('raphaelatech@gmail.com')
