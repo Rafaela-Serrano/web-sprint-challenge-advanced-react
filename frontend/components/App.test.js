@@ -13,7 +13,7 @@ test ('button Up to ve visible', () => {
 
   render (<AppFunctional/>);
 
-  const buttonUp = screen.getByRole('button', {name: /up/i});
+  const buttonUp = document.querySelector('#up')
 
 
   expect(buttonUp).toBeVisible();
