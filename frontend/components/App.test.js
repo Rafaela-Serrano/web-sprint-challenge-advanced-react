@@ -72,7 +72,7 @@ test ("typing on the input results in it's value changing to the entered text", 
 
     const emailDisplay = screen.findByText('raphaelatech@gmail.com')
 
-    expect(emailDisplay).toBeInTheDocument();
+    expect(emailDisplay).toBeInTheDocument;
 
   })
 
