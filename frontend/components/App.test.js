@@ -3,13 +3,11 @@ import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import AppFunctional from './AppFunctional';
 
-
-
-test ('app functional renders without errors' , () => {
+  test ('app functional renders without errors' , () => {
   render (<AppFunctional/>)
 })
 
-test ('button Up to be visible', () => {
+  test ('button Up to be visible', () => {
 
   render (<AppFunctional/>);
 
@@ -20,7 +18,7 @@ test ('button Up to be visible', () => {
 
 })
 
-test ('button Down to be visible' , () => {
+  test ('button Down to be visible' , () => {
 
   render (<AppFunctional/>);
 
@@ -30,7 +28,7 @@ test ('button Down to be visible' , () => {
 
 })
 
-test ('button Right to be visible', () => {
+  test ('button Right to be visible', () => {
 
   render (<AppFunctional/>);
 
@@ -40,7 +38,7 @@ test ('button Right to be visible', () => {
 
 })
 
-test ('button Left to be visible', () => {
+  test ('button Left to be visible', () => {
 
   render (<AppFunctional/>);
 
@@ -50,7 +48,7 @@ test ('button Left to be visible', () => {
 
 })
 
-test ('button Reset to be visible', () => {
+  test ('button Reset to be visible', () => {
   
   render (<AppFunctional/>);
 
@@ -60,7 +58,7 @@ test ('button Reset to be visible', () => {
 
 })
 
-test ("typing on the input results in it's value changing to the entered text", async() => {
+  test ("typing on the input results in it's value changing to the entered text", async() => {
 
   render (<AppFunctional/>);
 
